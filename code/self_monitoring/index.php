@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('utility/common_func.php');
+require_once('config/constants.php');
 //ログイン認証
 $userId = checkLogin();
 
@@ -12,6 +13,7 @@ unset($_SESSION['msg']);
 <!DOCTYPE html>
 <html lang="ja">
 <?php require_once('utility/head.php'); ?>
+
 <body>
   <div class="container"> <!-- 自動的に左右に適切な余白 -->
     <div class="mb-3">
@@ -76,7 +78,9 @@ unset($_SESSION['msg']);
             <td><?= $item['date'] ?></td>
             <td><?= truncateWithEllipsis($item['event'], 20) ?></td>
             <td><?= truncateWithEllipsis($item['distortion'], 20) ?></td>
-            <td><?= $item['feeling_level'] ?></td>
+            <td>
+              <?= FEELING_LEVELS[$item['feeling_level']]['label'] ?? '' ?>
+            </td>
             <td><?= truncateWithEllipsis($item['feeling'], 20) ?></td>
             <td><?= truncateWithEllipsis($item['awareness'], 20) ?></td>
             <td><a href="detail.php?id=<?= urlencode($item['id']); ?>">詳細</a></td>

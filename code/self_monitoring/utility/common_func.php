@@ -49,9 +49,7 @@ function checkLogin() {
     }
     return $userId; // 後続で使える
 }
-?>
 
-<?php
 /**
  * 空白文字を除去して値がある場合のみ代入する関数
  *
@@ -73,4 +71,3 @@ function truncateWithEllipsis($text, $length = 20, $encoding = 'UTF-8') {
     return $text;
 }
 ?>
-

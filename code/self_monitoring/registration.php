@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('utility/common_func.php');
+require_once('config/constants.php');
 //ログイン認証
 checkLogin();
 //エラーメッセージ、旧入力値の取得
@@ -111,16 +112,25 @@ if ($date) {
 
                             <!-- 気持ちレベル -->
                             <div class="mb-3">
-                                <label for="feelingLevel" class="form-label">気持ちレベル</label>
-                                <select name="feelingLevel" class="form-select">
-                                    <?php
-                                    for ($l = 0; $l <= 10; $l++) {
-                                        $feelingLevel = $l * 10;
-                                        $selected = (isset($selectedFeelingLevel) && $feelingLevel == $selectedFeelingLevel) ? 'selected' : '';
-                                        echo "<option value=\"$feelingLevel\" $selected>$feelingLevel</option>";
-                                    }
-                                    ?>
-                                </select>
+                                <label class="form-label">気持ち</label>
+
+                                <div class="d-flex gap-3">
+                                    <?php foreach (FEELING_LEVELS as $value => $item): ?>
+
+                                        <input type="radio"
+                                            class="btn-check"
+                                            name="feelingLevel"
+                                            id="feeling<?= $value ?>"
+                                            value="<?= $value ?>"
+                                            <?= (isset($selectedFeelingLevel) && $selectedFeelingLevel == $value) ? 'checked' : '' ?>>
+
+                                        <label class="btn <?= $item['class'] ?>"
+                                            for="feeling<?= $value ?>">
+                                            <?= $item['label'] ?>
+                                        </label>
+
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
 
                             <!-- 気持ち -->
